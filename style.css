@@ -4,3 +4,7 @@
 */
 
 /* it will also give information about the wordpress theme alongside styles -- has to be anmed style.css */
+body {
+  color: red;
+  background-color: aqua;
+}
