@@ -1,6 +1,7 @@
 
 <!-- This is a convention in wordpress to creaste a file name single.php which will hold the single page details whenever use visits any of the exisiting posts -->
 <?php
+get_header();
 // this is a wordpress function to loop until there are posts
 while(have_posts()) {
 // this function will keep track of all the posts
@@ -10,5 +11,5 @@ while(have_posts()) {
   <?php the_content(); ?>
   <hr>
 <?php }
-
+get_footer();
 ?>

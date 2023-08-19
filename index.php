@@ -1,4 +1,5 @@
-<?php
+<?php get_header(); 
+
 // this is a wordpress function to loop until there are posts
 while(have_posts()) {
 // this function will keep track of all the posts
@@ -8,5 +9,7 @@ while(have_posts()) {
   <?php the_content(); ?>
 
 <?php }
+get_footer(); 
 
 ?>
+ 
