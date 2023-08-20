@@ -13,9 +13,9 @@ function bbe_files(){
 
 function university_features(){
   //to add menu option to our theme
-  register_nav_menu('headerMenuLocation','Header Menu Location');
-  register_nav_menu('footerMenuLocationOne','Footer Menu Location One');
-  register_nav_menu('footerMenuLocationTwo','Footer Menu Location Two');
+  // register_nav_menu('headerMenuLocation','Header Menu Location');
+  // register_nav_menu('footerMenuLocationOne','Footer Menu Location One');
+  // register_nav_menu('footerMenuLocationTwo','Footer Menu Location Two');
   add_theme_support('title-tag');
 }
 

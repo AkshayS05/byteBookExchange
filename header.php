@@ -20,19 +20,17 @@
         <div class="site-header__menu group">
           <nav class="main-navigation">
             <!-- functionto add links -->
-           <!-- <ul>
-              <li><a href="<?php echo site_url('/about-us') ?>">About Us</a></li>
+           <ul>
+            <!-- to highlight the currently active page -->
+            <!-- if the curr page is about us page or curr page's parent is about us then add this class -->
+              <li <?php if(is_page('about-us')or wp_get_post_parent_id(0) == 18) echo'class="current-menu-item"' ?>><a href="<?php echo site_url('/about-us') ?>">About Us</a></li>
               <li><a href="">Programs</a></li>
               <li><a href="">Events</a></li>
               <li><a href="">Campuses</a></li>
               <li><a href="">Blog</a></li>
             </ul> 
--->
-<!-- wp_nav_menu requires array of argumments(associative)-->
-        <?php wp_nav_menu(array(
-          'theme_location' =>'headerMenuLocation'
-        ));
-        ?>
+
+
 
           </nav>
           <div class="site-header__util">
