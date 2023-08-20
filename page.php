@@ -34,15 +34,17 @@ while(have_posts()) {
     
 
 <!-- sidebar menu -->
-<!--
+
       <div class="page-links">
         <h2 class="page-links__title"><a href="#">About Us</a></h2>
         <ul class="min-list">
-          <li class="current_page_item"><a href="#">Our History</a></li>
-          <li><a href="#">Our Goals</a></li>
+          <?php 
+          //to list pages-- this will list all the poges we have on our site.
+          wp_list_pages();
+          ?>
         </ul>
       </div>
--->
+
       <div class="generic-content">
     <?php 
     the_content();
