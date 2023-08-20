@@ -22,6 +22,7 @@ while(have_posts()) {
       <!-- // if current page has the parent page using postID 
       // get_the_ID() to get the parents id dynamically not only for About us for example. -->
       <?php
+      // if current page is the parent page it will output 0 else it will give parents' id
       $theParent = wp_get_post_parent_id(get_the_ID());
       if ($theParent) { ?>
         <div class="metabox metabox--position-up metabox--with-home-link">
@@ -33,17 +34,39 @@ while(have_posts()) {
     ?>
     
 
-<!-- sidebar menu -->
+      <!-- sidebar menu -->
+      <?php   
+      //return pages and not output on screen
+  $testArray = get_pages(array(
+    // if current page has children it will return else it won't return anything.
+        'child_of' => get_the_ID()
+));
 
+      if($theParent or $testArray){?>
       <div class="page-links">
-        <h2 class="page-links__title"><a href="#">About Us</a></h2>
+        <h2 class="page-links__title"><a href="<?php echo get_permalink($theParent) ?>"><?php echo get_the_title($theParent)?></a></h2>
         <ul class="min-list">
           <?php 
           //to list pages-- this will list all the poges we have on our site.
-          wp_list_pages();
+          // requires an associative array-- which is like a key value
+          if($theParent){
+            //if there is a parent page
+            $findChildrenOf = $theParent;
+          }else{
+            $findChildrenOf = get_the_ID();
+          }
+          wp_list_pages(array(
+            // to not print "Pages'
+            'title_li' => NULL,
+            'child_of' => $findChildrenOf,
+            // to sort child pages which is alphabetically by default
+              'sort_column' => 'menu_order'
+          ));
           ?>
         </ul>
       </div>
+   <?php }
+    ?>
 
       <div class="generic-content">
     <?php 
