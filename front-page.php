@@ -50,6 +50,7 @@
               
             ));
             //to access exisiting methods inside WP_Query
+            // the_permalink() fetches links for posts
             while($homepagePosts-> have_posts()){
               $homepagePosts-> the_post(); ?>
               <div class="event-summary">
@@ -67,7 +68,7 @@
             ?>
          
 
-          <p class="t-center no-margin"><a href="#" class="btn btn--yellow">View All Blog Posts</a></p>
+          <p class="t-center no-margin"><a href="<?php echo site_url('/blog') ?>" class="btn btn--yellow">View All Blog Posts</a></p>
         </div>
       </div>
     </div>
