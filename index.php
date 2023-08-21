@@ -22,7 +22,8 @@ get_header();
           </h2>
           <!-- to display author and other relevant information -->
           <div class="metabox">
-            <p>Posted By <?php the_author_posts_link(); ?> on 06.8.23 in News </p>
+            <!-- n.j.s => Month, date, year -->
+            <p>Posted By <?php the_author_posts_link(); ?> on <?php the_time('n.j.y'); ?> in <?php echo get_the_category_list(', '); ?> </p>
         </div>
         <div class ="generic-content">
           <?php the_excerpt(); ?>
@@ -32,9 +33,11 @@ get_header();
       </div>
         <?php
         }
+        
+        // <!-- pagination -->
+        echo paginate_links();
         ?>
-
-    </div>
+      </div>
 
 <?php
 get_footer();
