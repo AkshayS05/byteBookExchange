@@ -2,8 +2,8 @@
 
 <html <?php language_attributes() ?>>
   <head>
-    <meta chatset="<?php bloginfo('charset')?>">
-    <meta name="viewport" content="width=devide-width, initial-scale=1">
+  <meta charset="<?php bloginfo('charset'); ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- to get css styles 
     this lets wordpress be in control of our head section. it will load ehatever reqwuies using sytles from plugins
   -->
@@ -19,7 +19,7 @@
         <i class="site-header__menu-trigger fa fa-bars" aria-hidden="true"></i>
         <div class="site-header__menu group">
           <nav class="main-navigation">
-            <!-- functionto add links -->
+            <!-- function to add links -->
            <ul>
             <!-- to highlight the currently active page -->
             <!-- if the curr page is about us page or curr page's parent is about us then add this class -->
