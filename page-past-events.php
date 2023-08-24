@@ -6,20 +6,45 @@ get_header();
       <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri('images/ocean.jpg') ?>)"></div>
       <div class="page-banner__content container container--narrow">
         <h1 class="page-banner__title">
-          All Events
+         Past Events
         </h1>
         <div class="page-banner__intro">
           <p>
-            See what is going on in our world. 🌏
+            A recap of our past events 🌏
           </p>
         </div>
       </div>
     </div>
       <div class="container container--narrow page-section">
         <?php
+
+$today = date('Ymd');
+$pastEvents= new WP_Query(array(
+  //parameters
+  // paged weill tell the custom query about on which page it should be on
+  //get_query_var() provides all sort of info about current url
+  'paged' => get_query_var('paged',1),
+  'post_type' => 'event',
+  // to say we weant to sort using custom data
+  'meta_key' => 'event_date',
+  //for letters and values, we can use meta_value, however, for numbers, we should user meta_value_num
+  'orderby' => 'meta_value_num',
+  'order'=> 'ASC',
+  //to not show past events
+ 
+  'meta_query' => array(
+    array(
+      //only return posts if the event date is greater or equal to todays date.
+      'key' => 'event_date',
+      'compare' => '<',
+      'value' => $today,
+      'type' => 'numeric'
+    )
+  )
+)); 
         // will loop until there are posts in the database
-        while(have_posts()){
-          the_post(); ?>
+        while($pastEvents-> have_posts()){
+          $pastEvents-> the_post(); ?>
 
           <div class="event-summary">
           <a class="event-summary__date t-center" href="#">
@@ -42,12 +67,12 @@ get_header();
         <?php
         }
         
-        // <!-- pagination -->
-        echo paginate_links();
+        // <!-- pagination--> only works for default queries that wordpress makes on its own that are tied to the current url -->
+        // provide information of custom query to amke it work.
+        echo paginate_links(array(
+          'total' => $pastEvents -> max_num_pages
+        ));
         ?>
-        <hr class="section-break" />
-  <p>Looking for a recap of our past events? <a href="<?php echo site_url('/past-events') ?>">Check out our past events archive. <a></p>
-
       </div>
 
 <?php
