@@ -18,8 +18,8 @@ while(have_posts()) {
     <div class="container container--narrow page-section">
 
     <div class="metabox metabox--position-up metabox--with-home-link">
-          <!-- get_the_title to get the title of the post we provide and as a link we use get_permalink -->
-      <p><a class="metabox__blog-home-link" href="<?php echo site_url('/blog'); ?>"><i class="fa fa-home" aria-hidden="true"></i> Events Home</a> <span class="metabox__main"><?php the_title(); ?></span></p>
+         <!-- to get the url for the post type archive -->
+      <p><a class="metabox__blog-home-link" href="<?php echo get_post_type_archive_link('event'); ?>"><i class="fa fa-home" aria-hidden="true"></i> Events Home</a> <span class="metabox__main"><?php the_title(); ?></span></p>
     </div>
 
     <div class="generic-content">
