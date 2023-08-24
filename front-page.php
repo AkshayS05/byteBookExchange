@@ -34,15 +34,19 @@
             <div class="event-summary__content">
               <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
               <!-- wp_trim_words get two arguments, one the content we want to trim and second is number of words we want to trim. -->
-              <p><?php echo wp_trim_words(get_the_content(),18); ?> <a href="<?php the_permalink(); ?>" class="nu gray">Learn more</a></p>
+              <?php if(has_excerpt()){
+                // the_excerpt(); will create an automatic padding on each side, thus to tackle that we can use another function called get_the_excerpt()
+                  echo get_the_excerpt();
+              } else{
+                echo wp_trim_words(get_the_content(), 18);
+              } ?> <a href="<?php the_permalink(); ?>" class="nu gray">Learn more</a></p>
             </div>
           </div>
           <?php }
-
-                  
+      
           ?>
 
-          <p class="t-center no-margin"><a href="#" class="btn btn--blue">View All Events</a></p>
+          <p class="t-center no-margin"><a href="<?php echo get_post_Type_archive_link('event'); ?>" class="btn btn--blue">View All Events</a></p>
         </div>
       </div>
       <div class="full-width-split__two">
