@@ -1,5 +1,5 @@
 
-<!-- This is a convention in wordpress to creaste a file name single.php which will hold the single page details whenever use visits any of the exisiting posts -->
+<!-- This is a convention in wordpress to create a file name single.php which will hold the single page details whenever use visits any of the exisiting posts -->
 <?php
 get_header();
 // this is a wordpress function to loop until there are posts
