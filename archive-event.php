@@ -22,9 +22,16 @@ get_header();
           the_post(); ?>
 
           <div class="event-summary">
-            <a class="event-summary__date t-center" href="#">
-              <span class="event-summary__month">Mar</span>
-              <span class="event-summary__day">25</span>
+          <a class="event-summary__date t-center" href="#">
+              <!-- event_date is the name we provided in plugin acf -->
+              <span class="event-summary__month"><?php
+              // php class --> it will return the current date if we don't provide it any date.
+              $eventDate = new DateTime(get_field('event_date'));
+              echo $eventDate->format('M')
+              ?></span>
+              <span class="event-summary__day"><?php 
+               echo $eventDate->format('d')
+              ?></span>
             </a>
             <div class="event-summary__content">
               <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>

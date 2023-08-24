@@ -25,6 +25,28 @@ add_action('wp_enqueue_scripts', "bbe_files");
 //to get the site title
 add_action('after_setup_theme', "university_features");
 
+//while calling the function, wordpress provides a reference to the $query object
+function university_adjust_queries($query){
+  //set it only for events page
+  //is_main_query will check if the query passsed to the function is not a custom query and is default url based query
+  if(!is_admin() AND is_post_type_archive('event') AND $query-> is_main_query()){
+    $today = date('Ymd');
+  //order by event date and exclude past events
+    $query -> set('meta_key','event_date');
+    $query -> set('orderby','meta_value_num');
+    $query -> set('order','ASC');
+    $query -> set('meta_query',array(
+      array(
+        //only return posts if the event date is greater or equal to todays date.
+        'key' => 'event_date',
+        'compare' => '>=',
+        'value' => $today,
+        'type' => 'numeric'
+      )
+    ));
+  }
+}
 
+add_action('pre_get_posts', 'university_adjust_queries');
 
 ?>

@@ -20,7 +20,7 @@
           $homePageEvents= new WP_Query(array(
             //parameters
             //-1 means give us all the posts that meet this condition
-            'posts_per_page' => -1,
+            'posts_per_page' => 2,
             'post_type' => 'event',
             // to say we weant to sort using custom data
             'meta_key' => 'event_date',
