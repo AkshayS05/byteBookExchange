@@ -25,21 +25,6 @@ add_action('wp_enqueue_scripts', "bbe_files");
 //to get the site title
 add_action('after_setup_theme', "university_features");
 
-function university_post_types(){
-  //register a new post type
-  register_post_type('event',array(
-    //type of post we want
-    'public'=> true,
-    'labels' => array(
-      // if name is not added, it will use the default.
-      'name' => 'Events'
-    ),
-    'menu_icon' => 'dashicons-calendar-alt'
-  ));
-}
 
-
-// to add a new post type
-add_action('init','university_post_types');
 
 ?>
