@@ -27,6 +27,13 @@ add_action('after_setup_theme', "university_features");
 
 //while calling the function, wordpress provides a reference to the $query object
 function university_adjust_queries($query){
+  if(!is_admin() AND is_post_type_archive('program') AND is_main_query()){
+
+    $query -> set('orderby', 'title');
+    $query->set('order', 'ASC');
+    $query->set('posts_per_page', -1);
+
+  }
   //set it only for events page
   //is_main_query will check if the query passsed to the function is not a custom query and is default url based query
   if(!is_admin() AND is_post_type_archive('event') AND $query-> is_main_query()){
