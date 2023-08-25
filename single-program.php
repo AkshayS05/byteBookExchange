@@ -59,7 +59,11 @@ while(have_posts()) {
               )
             )
           )); 
+         
+         if($homePageEvents->have_posts()){
 
+          echo '<hr class="section-break">';
+          echo '<h2 class="headline headline--medium">Upcoming ' . get_the_title() . ' Events </h2>';
           while($homePageEvents ->have_posts()){
             //this will make the data, ready
             $homePageEvents->the_post(); ?>
@@ -87,7 +91,10 @@ while(have_posts()) {
               } ?> <a href="<?php the_permalink(); ?>" class="nu gray">Learn more</a></p>
             </div>
           </div>
-          <?php } ?>
+          <?php }
+
+         }
+         ?>
   </div>
 
 
