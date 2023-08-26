@@ -59,7 +59,8 @@ while(have_posts()) {
       while($relatedInstructors ->have_posts()){
         //this will make the data, ready
         $relatedInstructors->the_post(); ?>
-        <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+        <li class="professor-card__list-item">
+          <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
 
       <?php }
 
