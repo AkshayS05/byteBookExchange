@@ -56,14 +56,18 @@ while(have_posts()) {
 
       echo '<hr class="section-break">';
       echo '<h2 class="headline headline--medium">' . get_the_title() . ' Instructors </h2>';
+      echo '<ul class="professor-cards">';
       while($relatedInstructors ->have_posts()){
         //this will make the data, ready
         $relatedInstructors->the_post(); ?>
         <li class="professor-card__list-item">
-          <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+          <a class="professor-card" href="<?php the_permalink(); ?>">
+            <img class="professor-card__image" src="<?php the_post_thumbnail_url(); ?>">
+            <span class="professor-card__name"><?php the_title(); ?></span>
+          </a></li>
 
       <?php }
-
+        echo '</ul>';
       }
       // function reset the global post object back to default url based query.
       wp_reset_postdata();
