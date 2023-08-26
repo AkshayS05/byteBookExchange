@@ -28,7 +28,45 @@ while(have_posts()) {
     </div>
     <!-- to display related events -->
 
-<?php 
+      <?php 
+
+      $relatedInstructors= new WP_Query(array(
+        //parameters
+        //-1 means give us all the posts that meet this condition
+        'posts_per_page' => -1,
+        'post_type' => 'instructor',
+
+        //for letters and values, we can use meta_value, however, for numbers, we should user meta_value_num
+        'orderby' => 'title',
+        'order'=> 'ASC',
+        //to not show past events
+      
+        'meta_query' => array(
+          array(
+            // if the array of related programs contain the ID number of the current program post
+            'key' => 'related_programs',
+            'compare' => 'LIKE',
+            // to get the string
+            'value' => '"' . get_the_ID() . '"'
+          )
+        )
+      )); 
+
+      if($relatedInstructors->have_posts()){
+
+      echo '<hr class="section-break">';
+      echo '<h2 class="headline headline--medium">' . get_the_title() . ' Instructors </h2>';
+      while($relatedInstructors ->have_posts()){
+        //this will make the data, ready
+        $relatedInstructors->the_post(); ?>
+        <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+
+      <?php }
+
+      }
+      // function reset the global post object back to default url based query.
+      wp_reset_postdata();
+
           $today = date('Ymd');
           $homePageEvents= new WP_Query(array(
             //parameters
