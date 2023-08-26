@@ -24,6 +24,8 @@ function university_features(){
   add_image_size('instructorLandscape', 400, 260, true);
   //for portrait
   add_image_size('instructorPortrait',480, 650, true);
+  //for banner image
+  add_image_size('pageBanner', 1500, 350, true);
 }
 
 // wp_enqueue_scrips - to load css and js files
