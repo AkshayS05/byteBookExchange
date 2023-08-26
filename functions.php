@@ -20,6 +20,10 @@ function university_features(){
 
   //to add featured image
   add_theme_support('post-thumbnails');
+  //image -> w X h, boolean - for crop, to decide from where to crop, we can use an array instead of a boolean
+  add_image_size('instructorLandscape', 400, 260, true);
+  //for portrait
+  add_image_size('instructorPortrait',480, 650, true);
 }
 
 // wp_enqueue_scrips - to load css and js files
