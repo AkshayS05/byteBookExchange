@@ -65,50 +65,7 @@ while(have_posts()) {
       // function reset the global post object back to default url based query.
       wp_reset_postdata();
 
-          $today = date('Ymd');
-          $homePageEvents= new WP_Query(array(
-            //parameters
-            //-1 means give us all the posts that meet this condition
-            'posts_per_page' => 2,
-            'post_type' => 'event',
-            // to say we weant to sort using custom data
-            'meta_key' => 'event_date',
-            //for letters and values, we can use meta_value, however, for numbers, we should user meta_value_num
-            'orderby' => 'meta_value_num',
-            'order'=> 'ASC',
-            //to not show past events
-           
-            'meta_query' => array(
-              array(
-                //only return posts if the event date is greater or equal to todays date.
-                'key' => 'event_date',
-                'compare' => '>=',
-                'value' => $today,
-                'type' => 'numeric'
-              ),
-              array(
-                // if the array of related programs contain the ID number of the current program post
-                'key' => 'related_programs',
-                'compare' => 'LIKE',
-                // to get the string
-                'value' => '"' . get_the_ID() . '"'
-              )
-            )
-          )); 
-         
-         if($homePageEvents->have_posts()){
-
-          echo '<hr class="section-break">';
-          echo '<h2 class="headline headline--medium">Upcoming ' . get_the_title() . ' Events </h2>';
-          while($homePageEvents ->have_posts()){
-            //this will make the data, ready
-            $homePageEvents->the_post(); 
-            // bsasically when there is nothing diff we want the same file to perform, if we have to we can sue function
-            get_template_part('template-parts/content-event');
-
-          }
-
-         }
+       
          ?>
   </div>
 
