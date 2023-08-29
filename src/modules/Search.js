@@ -44,9 +44,14 @@ class Search {
     }
     this.previousValue = this.searchField.val();
   }
+  //this will run after 2000ms
   getResults() {
-    this.resultsDiv.html("Imagine a search here maan..!!");
-    this.isSpinnerVisible = false;
+    $.getJSON(
+      `http://bytebookexchange.local/wp-json/wp/v2/posts?search=${this.searchField.val()}`,
+      function (posts) {
+        console.log(posts[0].title.rendered);
+      }
+    );
   }
   keyPressDispatcher(e) {
     // only show when any other input is not focused on the screen.
