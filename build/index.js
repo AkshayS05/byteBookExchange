@@ -104,6 +104,7 @@ __webpack_require__.r(__webpack_exports__);
 class Search {
   //1. describe/initiate object
   constructor() {
+    this.addSearchHTML();
     this.resultsDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()("#search-overlay__results");
     this.openButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".js-search-trigger");
     this.closeButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".search-overlay__close");
@@ -136,7 +137,7 @@ class Search {
           this.resultsDiv.html('<div class="spinner-loader"></div>');
           this.isSpinnerVisible = true;
         }
-        this.typingTimer = setTimeout(this.getResults.bind(this), 2000);
+        this.typingTimer = setTimeout(this.getResults.bind(this), 750);
         // if there's nothing in the search field
       } else {
         this.resultsDiv.html("");
@@ -171,12 +172,33 @@ class Search {
   openOverlay() {
     this.searchOverlay.addClass("search-overlay--active");
     jquery__WEBPACK_IMPORTED_MODULE_0___default()("body").addClass("body-no-scroll");
+    this.searchField.val("");
+    setTimeout(() => this.searchField.focus(), 301);
     this.isOverlayOpen = true;
   }
   closeOverlay() {
     this.searchOverlay.removeClass("search-overlay--active");
     jquery__WEBPACK_IMPORTED_MODULE_0___default()("body").removeClass("body-no-scroll");
     this.isOverlayOpen = false;
+  }
+  addSearchHTML() {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("body").append(`
+      <div class="search-overlay">
+      <div class="search-overlay__top">
+        <div class="container">
+          <i class="fa fa-search search-overlay__icon" aria-hidden="true"></i>
+          <input type="text" class="search-term" autocomplete="off" placeholder="What are you looking for?" id="search-term">
+          <i class="fa fa-window-close search-overlay__close" aria-hidden="true"></i>
+        </div>
+      </div>
+  
+      <div class="container">
+        <div id="search-overlay__results">
+         
+        </div>
+      </div>
+    </div>
+      `);
   }
 }
 /* harmony default export */ __webpack_exports__["default"] = (Search);
