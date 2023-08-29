@@ -47,7 +47,9 @@ class Search {
   //this will run after 2000ms
   getResults() {
     $.getJSON(
-      `http://bytebookexchange.local/wp-json/wp/v2/posts?search=${this.searchField.val()}`,
+      `${
+        bbeData.root_url
+      }/wp-json/wp/v2/posts?search=${this.searchField.val()}`,
       (posts) => {
         this.resultsDiv.html(`
         <h2 class="search-overlay__section-title">General Information</h2>
@@ -66,6 +68,7 @@ class Search {
           .join("")}
         </ul>
         `);
+        this.isSpinnerVisible = false;
       }
     );
   }

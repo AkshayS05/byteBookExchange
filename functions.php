@@ -36,6 +36,13 @@ function bbe_files(){
   //javascript file
   wp_enqueue_script('main-bbe-js', get_theme_file_uri('./build/index.js'), array('jquery'),'1.0',true );
 
+  // takes three agruments , name of js file, variable name, array of data 
+  wp_localize_script('main-bbe-js','bbeData',array(
+    // associative array
+    'root_url' => get_site_url(),
+    
+  ));
+
 }
 
 function university_features(){
