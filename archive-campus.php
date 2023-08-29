@@ -12,10 +12,13 @@ pageBanner(array(
         <?php
         // will loop until there are posts in the database
         while(have_posts()){
-          the_post(); ?>
+          the_post(); 
+          get_field('map_location');
+          ?>
     <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
     <?php the_field('map_location'); ?>
         <?php
+    
         }
         // <!-- pagination -->
         echo paginate_links();

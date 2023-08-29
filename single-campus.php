@@ -13,22 +13,23 @@ while(have_posts()) {
 
     <div class="metabox metabox--position-up metabox--with-home-link">
          <!-- to get the url for the post type archive -->
-      <p><a class="metabox__blog-home-link" href="<?php echo get_post_type_archive_link('program'); ?>"><i class="fa fa-home" aria-hidden="true"></i> All Programs</a> <span class="metabox__main"><?php the_title(); ?></span></p>
+      <p><a class="metabox__blog-home-link" href="<?php echo get_post_type_archive_link('campus'); ?>"><i class="fa fa-home" aria-hidden="true"></i> All Campuses</a> <span class="metabox__main"><?php the_title(); ?></span></p>
     </div>
 
     <div class="generic-content">
       
-      <?php the_content(); ?>
+      <?php the_content(); 
+    the_field('map_location');
+      ?>
     </div>
-    <!-- to display related events -->
+    <!-- to display related campus -->
+    <?php 
 
-      <?php 
-
-      $relatedInstructors= new WP_Query(array(
+      $relatedPrograms= new WP_Query(array(
         //parameters
         //-1 means give us all the posts that meet this condition
         'posts_per_page' => -1,
-        'post_type' => 'instructor',
+        'post_type' => 'program',
 
         //for letters and values, we can use meta_value, however, for numbers, we should user meta_value_num
         'orderby' => 'title',
@@ -37,8 +38,8 @@ while(have_posts()) {
       
         'meta_query' => array(
           array(
-            // if the array of related programs contain the ID number of the current program post
-            'key' => 'related_programs',
+            // if the array of related campus contain the ID number of the current program post
+            'key' => 'related_campus',
             'compare' => 'LIKE',
             // to get the string
             'value' => '"' . get_the_ID() . '"'
@@ -46,18 +47,16 @@ while(have_posts()) {
         )
       )); 
 
-      if($relatedInstructors->have_posts()){
+      if($relatedPrograms->have_posts()){
 
       echo '<hr class="section-break">';
-      echo '<h2 class="headline headline--medium">' . get_the_title() . ' Instructors </h2>';
-      echo '<ul class="professor-cards">';
-      while($relatedInstructors ->have_posts()){
+      echo '<h2 class="headline headline--medium">Programs Available At this Campus</h2>';
+      echo '<ul class="min-list link-list">';
+      while($relatedPrograms ->have_posts()){
         //this will make the data, ready
-        $relatedInstructors->the_post(); ?>
-        <li class="professor-card__list-item">
-          <a class="professor-card" href="<?php the_permalink(); ?>">
-            <img class="professor-card__image" src="<?php the_post_thumbnail_url('instructorLandscape'); ?>">
-            <span class="professor-card__name"><?php the_title(); ?></span>
+        $relatedPrograms->the_post(); ?>
+        <li>
+          <a href="<?php the_permalink(); ?>"><?php the_title(); ?>
           </a></li>
 
       <?php }
@@ -108,22 +107,6 @@ while(have_posts()) {
             get_template_part('template-parts/content-event');
 
           }
-
-         }
-         wp_reset_postdata();
-         //to show campuses
-         $relatedCampuses = get_field('related_campus');
-
-         //check if there actually is a campus associated
-         if ($relatedCampuses) {
-          echo '<hr class="section-break">';
-          echo '<h2 class="headline headline--medium">' . get_the_title() . ' is Available At These Campuses:</h2>';
-
-          echo '<ul class="min-list link-list">';
-          foreach($relatedCampuses as $campus) {
-            ?> <li><a href="<?php echo get_the_permalink($campus); ?>"><?php echo get_the_title($campus) ?></a></li> <?php
-          }
-          echo '</ul>';
 
          }
          ?>
