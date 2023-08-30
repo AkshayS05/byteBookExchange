@@ -47,29 +47,42 @@ class Search {
   }
   //this will run after 2000ms
   getResults() {
-    $.getJSON(
-      `${
-        bbeData.root_url
-      }/wp-json/wp/v2/posts?search=${this.searchField.val()}`,
-      (posts) => {
+    $.when(
+      $.getJSON(
+        `${
+          bbeData.root_url
+        }/wp-json/wp/v2/posts?search=${this.searchField.val()}`
+      ),
+      $.getJSON(
+        `${
+          bbeData.root_url
+        }/wp-json/wp/v2/pages?search=${this.searchField.val()}`
+      )
+    ).then(
+      (posts, pages) => {
+        let combinedResults = posts[0].concat(pages[0]);
         this.resultsDiv.html(`
-        <h2 class="search-overlay__section-title">General Information</h2>
-        ${
-          posts.length
-            ? ' <ul class="link-list min-list">'
-            : "<p>No general information matches that search ☹"
-        }
-        ${posts
-          .map(
-            (post) =>
-              `<li><a href="${post.link}">${post.title.rendered}</a></li>
-              ${posts.length ? "</ul>" : ""}
-              `
-          )
-          .join("")}
-        </ul>
-        `);
+  <h2 class="search-overlay__section-title">General Information</h2>
+  ${
+    combinedResults.length
+      ? ' <ul class="link-list min-list">'
+      : "<p>No general information matches that search ☹"
+  }
+  ${combinedResults
+    .map(
+      (post) =>
+        `<li><a href="${post.link}">${post.title.rendered}</a></li>
+        ${combinedResults.length ? "</ul>" : ""}
+        `
+    )
+    .join("")}
+  </ul>
+  `);
         this.isSpinnerVisible = false;
+      },
+      () => {
+        this,
+          this.resultsDiv.html("<p>Unexpected error; Please try again!</p>");
       }
     );
   }
