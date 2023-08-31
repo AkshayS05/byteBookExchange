@@ -1,5 +1,13 @@
 <?php 
-
+function bbe_custom_rest(){
+  // this function accepts three arguments -> 1. post type you want to customize. 2. name of new field. 3. how to manage this field
+  register_rest_field("post",'authorName',array(
+    //associative array
+    'get_callback' => function(){
+      return get_the_author();
+    }
+  ));
+}
 //$args = NULL will make it optional
 function pageBanner($args= NULL){
   if(!isset($args['title'])) {
