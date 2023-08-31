@@ -71,7 +71,9 @@ class Search {
   ${combinedResults
     .map(
       (post) =>
-        `<li><a href="${post.link}">${post.title.rendered}</a>by ${post.authorName}</li>
+        `<li><a href="${post.link}">${post.title.rendered}</a>${
+          post.type === "post" ? ` by ${post.authorName}` : ""
+        }</li>
         ${combinedResults.length ? "</ul>" : ""}
         `
     )
