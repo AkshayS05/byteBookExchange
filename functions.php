@@ -1,4 +1,6 @@
 <?php 
+add_action('rest_api_init','bbe_custom_rest');
+
 function bbe_custom_rest(){
   // this function accepts three arguments -> 1. post type you want to customize. 2. name of new field. 3. how to manage this field
   register_rest_field("post",'authorName',array(
