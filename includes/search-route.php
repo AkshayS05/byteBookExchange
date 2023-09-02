@@ -10,6 +10,24 @@ function bbeRegisterSearch(){
 }
 
 function bbeSearchResults(){
-  return 'Yuhuuuuu you got it..';
+  // wordpress automatically converts php data to json data.
+  // to return json
+  // here we got collection of posts
+  $instructors = new WP_Query(array(
+    'post_type' => 'instructor'
+  ));
+  //posts = where all data for posts live
+
+    $instructorResults = array();
+
+    while($instructors->have_posts()){
+      $instructors -> the_post();
+      // this function takes two arguments, one is array you want to add on to, what you want to add in that array 
+      array_push($instructorResults, array(
+        'title' => get_the_title(),
+        'permalink' => get_the_permalink()
+      ));
+    }
+    return $instructorResults;
 }
 ?>
