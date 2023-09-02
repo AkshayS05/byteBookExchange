@@ -169,7 +169,7 @@ class Search {
   ${results.programs.map(post => `<li><a href="${post.permalink}">${post.title}</a></li>`).join("")}
         ${results.programs.length ? "</ul>" : ""} 
 
-        <h2>Instructors</h2>
+        <h2 class="search-overlay__section-title">Instructors</h2>
 
         ${results.instructors.length ? '<ul class="professor-cards">' : `<p>No instructors match that search.</p>`}
           ${results.instructors.map(item => `
@@ -189,7 +189,24 @@ class Search {
   ${results.campuses.map(post => `<li><a href="${post.permalink}">${post.title}</a></li>`).join("")}
         ${results.campuses.length.length ? "</ul>" : ""} 
 
-        <h2>Events</h2>
+        <h2 class="search-overlay__section-title">Events</h2>
+        ${results.events.length ? "" : `<p>No events match that search ☹ <a href="${bbeData.root_url}/events"> View all Events</a> </p>`}
+      
+  ${results.events.map(event => `
+  
+      <div class="event-summary">
+      <a class="event-summary__date t-center" href="${event.permalink}">
+  
+        <span class="event-summary__month">${event.month}</span>
+        <span class="event-summary__day">${event.day}</span>
+      </a>
+      <div class="event-summary__content">
+        <h5 class="event-summary__title headline headline--tiny"><a href="${event.permalink}">${event.title}</a></h5>
+       
+        <p>${event.description}<a href="${event.permalink}" class="nu gray">Learn more</a></p>
+      </div>
+    </div>
+  `).join("")}
         </div>
         </div>
       `);
