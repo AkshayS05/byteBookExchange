@@ -148,19 +148,51 @@ class Search {
   }
   //this will run after 2000ms
   getResults() {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default().when(jquery__WEBPACK_IMPORTED_MODULE_0___default().getJSON(`${bbeData.root_url}/wp-json/wp/v2/posts?search=${this.searchField.val()}`), jquery__WEBPACK_IMPORTED_MODULE_0___default().getJSON(`${bbeData.root_url}/wp-json/wp/v2/pages?search=${this.searchField.val()}`)).then((posts, pages) => {
-      let combinedResults = posts[0].concat(pages[0]);
+    //ist argument--where we wana send req
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().getJSON(`${bbeData.root_url}/wp-json/bbe/v1/search?term=${this.searchField.val()}`, results => {
       this.resultsDiv.html(`
-  <h2 class="search-overlay__section-title">General Information</h2>
-  ${combinedResults.length ? ' <ul class="link-list min-list">' : "<p>No general information matches that search ☹"}
-  ${combinedResults.map(post => `<li><a href="${post.link}">${post.title.rendered}</a>${post.type === "post" ? ` by ${post.authorName}` : ""}</li>
-        ${combinedResults.length ? "</ul>" : ""}
-        `).join("")}
-  </ul>
-  `);
+        <div class="row">
+        <div class="one-third">
+        <h2 class="search-overlay__section-title">General Information</h2>
+        ${results.generalInfo.length ? ' <ul class="link-list min-list">' : "<p>No general information matches that search ☹"}
+      
+        ${results.generalInfo.map(post => `<li><a href="${post.permalink}">${post.title}</a>${post.type === "post" ? ` by ${post.authorName}` : ""}</li>`).join("")}
+        ${results.generalInfo.length.length ? "</ul>" : ""} 
+        </div>
+
+
+        
+        <div class="one-third">
+        <h2 class="search-overlay__section-title">Programs</h2>
+        ${results.programs.length ? ' <ul class="link-list min-list">' : `<p>No programs match that search. <a href="${bbeData.root_url}/programs">View all programs</a></p>`}
+      
+  ${results.programs.map(post => `<li><a href="${post.permalink}">${post.title}</a></li>`).join("")}
+        ${results.programs.length ? "</ul>" : ""} 
+        <h2>Instructors</h2>
+        ${results.instructors.length ? '<ul class="professor-cards">' : `<p>No instructors match that search.</p>`}
+          ${results.instructors.map(item => `
+            <li class="professor-card__list-item">
+              <a class="professor-card" href="${item.permalink}">
+                <img class="professor-card__image" src="${item.image}">
+                <span class="professor-card__name">${item.title}</span>
+              </a>
+            </li>
+          `).join("")}
+        ${results.instructors.length ? "</ul>" : ""}
+        </div>
+
+        <div class="one-third">
+        <h2 class="search-overlay__section-title">Campuses</h2>
+        ${results.campuses.length ? ' <ul class="link-list min-list">' : `<p>No campuses match that search ☹ <a href="${bbeData.root_url}/campuses"> View all Campuses</a> </p>`}
+      
+  ${results.campuses.map(post => `<li><a href="${post.permalink}">${post.title}</a></li>`).join("")}
+        ${results.campuses.length.length ? "</ul>" : ""} 
+        
+        <h2>Events</h2>
+        </div>
+        </div>
+      `);
       this.isSpinnerVisible = false;
-    }, () => {
-      this, this.resultsDiv.html("<p>Unexpected error; Please try again!</p>");
     });
   }
   keyPressDispatcher(e) {
