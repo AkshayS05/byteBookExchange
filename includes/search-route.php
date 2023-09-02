@@ -9,12 +9,15 @@ function bbeRegisterSearch(){
   )); 
 }
 
-function bbeSearchResults(){
+function bbeSearchResults($data) {
   // wordpress automatically converts php data to json data.
   // to return json
   // here we got collection of posts
   $instructors = new WP_Query(array(
-    'post_type' => 'instructor'
+    'post_type' => 'instructor',
+    // s= search 
+    // prevention from sql injection
+    's' =>  sanitize_text_field($data['term']) 
   ));
   //posts = where all data for posts live
 
