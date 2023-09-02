@@ -88,7 +88,9 @@ class Search {
     .map((post) => `<li><a href="${post.permalink}">${post.title}</a></li>`)
     .join("")}
         ${results.programs.length ? "</ul>" : ""} 
+
         <h2>Instructors</h2>
+
         ${
           results.instructors.length
             ? '<ul class="professor-cards">'
@@ -97,12 +99,11 @@ class Search {
           ${results.instructors
             .map(
               (item) => `
-            <li class="professor-card__list-item">
+              <li class="professor-card__list-item">
               <a class="professor-card" href="${item.permalink}">
                 <img class="professor-card__image" src="${item.image}">
                 <span class="professor-card__name">${item.title}</span>
-              </a>
-            </li>
+              </a></li>
           `
             )
             .join("")}
@@ -121,7 +122,7 @@ class Search {
     .map((post) => `<li><a href="${post.permalink}">${post.title}</a></li>`)
     .join("")}
         ${results.campuses.length.length ? "</ul>" : ""} 
-        
+
         <h2>Events</h2>
         </div>
         </div>

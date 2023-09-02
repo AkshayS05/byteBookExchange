@@ -43,7 +43,9 @@ function bbeSearchResults($data) {
       if(get_post_type() == 'instructor'){
         array_push($mainQueryResults['instructors'], array(
           'title' => get_the_title(),
-          'permalink' => get_the_permalink()
+          'permalink' => get_the_permalink(),
+          // two things-> which post you wana find image for 0 means current and other is size
+          'image' => get_the_post_thumbnail_url(0, 'instructorLandscape')
         ));
       }
       if(get_post_type() == 'program'){
