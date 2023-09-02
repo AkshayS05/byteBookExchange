@@ -18,7 +18,7 @@ while(have_posts()) {
 
     <div class="generic-content">
       
-      <?php the_content(); ?>
+      <?php the_field('main_body_content'); ?>
     </div>
     <!-- to display related events -->
 

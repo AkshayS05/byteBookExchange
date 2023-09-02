@@ -51,7 +51,8 @@ function bbeSearchResults($data) {
       if(get_post_type() == 'program'){
         array_push($mainQueryResults['programs'], array(
           'title' => get_the_title(),
-          'permalink' => get_the_permalink()
+          'permalink' => get_the_permalink(),
+          'id' => get_the_id()
         ));
       }
       if(get_post_type() == 'campus'){
@@ -77,29 +78,38 @@ function bbeSearchResults($data) {
         ));
       }
     }
-    $programRelationshipQuery = new WP_Query(array(
-      'post_type' => 'instructor',
-      'meta_query' => array(
-        array(
+    // Relationship query
+    // to make it work when atleast one consition is true
+    $programsMetaQuery = array('relation' => 'OR');
+      foreach($results['programs'] as $item){
+        array_push($programsMetaQuery,   array(
           'key' => 'related_programs',
           'compare' => 'LIKE',
           // wordpress wraps each value in qutotations
-          'value' => '"65"'
-      ))
+          'value' => '"' . $item['id'] . '"'
+        ),);
+      }
+      if($mainQueryResults['programs']){
+        $programRelationshipQuery = new WP_Query(array(
+          // If meta query si emoty, it will give all the instructor posts
+          'post_type' => 'instructor',
+          'meta_query' => $programsMetaQuery 
         ));
-        while($programRelationshipQuery -> have_posts()){
-            $programRelationshipQuery -> the_post();
-
-            if(get_post_type() == 'instructor'){
-              array_push($mainQueryResults['instructors'], array(
-                'title' => get_the_title(),
-                'permalink' => get_the_permalink(),
-                // two things-> which post you wana find image for 0 means current and other is size
-                'image' => get_the_post_thumbnail_url(0, 'instructorLandscape')
-              ));
+            while($programRelationshipQuery -> have_posts()){
+                $programRelationshipQuery -> the_post();
+    
+                if(get_post_type() == 'instructor'){
+                  array_push($mainQueryResults['instructors'], array(
+                    'title' => get_the_title(),
+                    'permalink' => get_the_permalink(),
+                    // two things-> which post you wana find image for 0 means current and other is size
+                    'image' => get_the_post_thumbnail_url(0, 'instructorLandscape')
+                  ));
+                }
             }
-        }
-          $mainQueryResults['instructors'] = array_values(array_unique($mainQueryResults['instructors'],SORT_REGULAR ));
-    return $mainQueryResults;
+              $mainQueryResults['instructors'] = array_values(array_unique($mainQueryResults['instructors'],SORT_REGULAR ));
+                   return $mainQueryResults;
+      }
+   
 }
 ?>
