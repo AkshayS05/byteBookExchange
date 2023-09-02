@@ -77,6 +77,29 @@ function bbeSearchResults($data) {
         ));
       }
     }
+    $programRelationshipQuery = new WP_Query(array(
+      'post_type' => 'instructor',
+      'meta_query' => array(
+        array(
+          'key' => 'related_programs',
+          'compare' => 'LIKE',
+          // wordpress wraps each value in qutotations
+          'value' => '"65"'
+      ))
+        ));
+        while($programRelationshipQuery -> have_posts()){
+            $programRelationshipQuery -> the_post();
+
+            if(get_post_type() == 'instructor'){
+              array_push($mainQueryResults['instructors'], array(
+                'title' => get_the_title(),
+                'permalink' => get_the_permalink(),
+                // two things-> which post you wana find image for 0 means current and other is size
+                'image' => get_the_post_thumbnail_url(0, 'instructorLandscape')
+              ));
+            }
+        }
+          $mainQueryResults['instructors'] = array_values(array_unique($mainQueryResults['instructors'],SORT_REGULAR ));
     return $mainQueryResults;
 }
 ?>
