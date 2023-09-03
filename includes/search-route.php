@@ -92,12 +92,32 @@ function bbeSearchResults($data) {
       if($mainQueryResults['programs']){
         $programRelationshipQuery = new WP_Query(array(
           // If meta query si emoty, it will give all the instructor posts
-          'post_type' => 'instructor',
+          'post_type' => array(
+            'professor', 'event', 
+          ),
           'meta_query' => $programsMetaQuery 
         ));
             while($programRelationshipQuery -> have_posts()){
                 $programRelationshipQuery -> the_post();
     
+                if(get_post_type() == 'event'){
+                  $eventDate = new DateTime(get_field('event_date'));
+                  $description = null;
+                  if(has_excerpt()){
+                    $description = get_the_excerpt();
+                } else{
+                  $description = wp_trim_words(get_the_content(), 18);
+                } 
+                  array_push($mainQueryResults['events'], array(
+                    'title' => get_the_title(),
+                    'permalink' => get_the_permalink(),
+                    'month' => $eventDate -> format('M'),
+                    'day' => $eventDate -> format('d'),
+                    'description' => $description
+                  ));
+                }
+              }
+
                 if(get_post_type() == 'instructor'){
                   array_push($mainQueryResults['instructors'], array(
                     'title' => get_the_title(),
@@ -108,6 +128,7 @@ function bbeSearchResults($data) {
                 }
             }
               $mainQueryResults['instructors'] = array_values(array_unique($mainQueryResults['instructors'],SORT_REGULAR ));
+              $mainQueryResults['events'] = array_values(array_unique($mainQueryResults['events'],SORT_REGULAR ));
                    return $mainQueryResults;
       }
    
