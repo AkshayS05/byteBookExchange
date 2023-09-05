@@ -51,10 +51,16 @@ function bbeSearchResults($data) {
       if(get_post_type() == 'program'){
         $relatedCampuses = get_field('related_campus');
         if($relatedCampuses){
-          foreach(){
-            
+          foreach($relatedCampuses as $campus){
+            //push to the rest api array for programs
+            //array you want to add , 2. what you want to add
+            array_push($mainQueryResults['campuses'],array(
+              'title' => get_the_title($campus),
+              'permalink' => get_the_permalink($campus)
+            ));
           }
         }
+
         array_push($mainQueryResults['programs'], array(
           'title' => get_the_title(),
           'permalink' => get_the_permalink(),
@@ -100,9 +106,8 @@ function bbeSearchResults($data) {
       }
       
         $programRelationshipQuery = new WP_Query(array(
-          // If meta query si emoty, it will give all the instructor posts
-          'post_type' => array(
-            'professor', 'event', 
+          // If meta query is empty, it will give all the instructor posts
+          'post_type' => array('instructor', 'event', 
           ),
           'meta_query' => $programsMetaQuery 
         ));
