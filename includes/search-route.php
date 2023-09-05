@@ -49,6 +49,12 @@ function bbeSearchResults($data) {
         ));
       }
       if(get_post_type() == 'program'){
+        $relatedCampuses = get_field('related_campus');
+        if($relatedCampuses){
+          foreach(){
+            
+          }
+        }
         array_push($mainQueryResults['programs'], array(
           'title' => get_the_title(),
           'permalink' => get_the_permalink(),
@@ -78,18 +84,21 @@ function bbeSearchResults($data) {
         ));
       }
     }
+ 
+
     // Relationship query
+    if ($mainQueryResults['programs']) {
     // to make it work when atleast one consition is true
     $programsMetaQuery = array('relation' => 'OR');
-      foreach($results['programs'] as $item){
+      foreach($mainQueryResults['programs'] as $item){
         array_push($programsMetaQuery,   array(
           'key' => 'related_programs',
           'compare' => 'LIKE',
           // wordpress wraps each value in qutotations
           'value' => '"' . $item['id'] . '"'
-        ),);
+        ));
       }
-      if($mainQueryResults['programs']){
+      
         $programRelationshipQuery = new WP_Query(array(
           // If meta query si emoty, it will give all the instructor posts
           'post_type' => array(
@@ -97,6 +106,8 @@ function bbeSearchResults($data) {
           ),
           'meta_query' => $programsMetaQuery 
         ));
+
+
             while($programRelationshipQuery -> have_posts()){
                 $programRelationshipQuery -> the_post();
     
@@ -116,7 +127,7 @@ function bbeSearchResults($data) {
                     'description' => $description
                   ));
                 }
-              }
+            
 
                 if(get_post_type() == 'instructor'){
                   array_push($mainQueryResults['instructors'], array(
@@ -129,8 +140,8 @@ function bbeSearchResults($data) {
             }
               $mainQueryResults['instructors'] = array_values(array_unique($mainQueryResults['instructors'],SORT_REGULAR ));
               $mainQueryResults['events'] = array_values(array_unique($mainQueryResults['events'],SORT_REGULAR ));
-                   return $mainQueryResults;
-      }
-   
+          }
+         return $mainQueryResults;
+      
 }
 ?>
