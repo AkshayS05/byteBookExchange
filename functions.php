@@ -143,4 +143,24 @@ function noSubsAdminBar(){
     show_admin_bar(false);
   }
 }
+
+//customize login screen
+add_filter('login_headerurl','headerUrl');
+//to change the link on login page
+function headerUrl(){
+  return esc_url(site_url('/'));
+}
+add_action('login_enqueue_scripts', 'loginCss');
+
+function loginCss(){
+  wp_enqueue_style('bbe_main_styles', get_theme_file_uri('./build/style-index.css') );
+  wp_enqueue_style('bbe_extra_styles', get_theme_file_uri('./build/index.css') );
+  wp_enqueue_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' );
+  wp_enqueue_style('custom-google-fonts', '//fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:100,300,400,400i,700,700i' );
+}
+add_filter('login_headertitle', 'loginTitle');
+
+function loginTitle(){
+  return get_bloginfo('name');
+}
 ?>
