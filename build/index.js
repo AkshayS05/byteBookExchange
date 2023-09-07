@@ -2065,9 +2065,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_MobileMenu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/MobileMenu */ "./src/modules/MobileMenu.js");
 /* harmony import */ var _modules_HeroSlider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/HeroSlider */ "./src/modules/HeroSlider.js");
 /* harmony import */ var _modules_Search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/Search */ "./src/modules/Search.js");
+/* harmony import */ var _modules_MyNotes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/MyNotes */ "./src/modules/MyNotes.js");
 
 
 // Our modules / classes
+
 
 
 
@@ -2076,6 +2078,7 @@ __webpack_require__.r(__webpack_exports__);
 const mobileMenu = new _modules_MobileMenu__WEBPACK_IMPORTED_MODULE_1__["default"]();
 const heroSlider = new _modules_HeroSlider__WEBPACK_IMPORTED_MODULE_2__["default"]();
 const search = new _modules_Search__WEBPACK_IMPORTED_MODULE_3__["default"]();
+const notes = new _modules_MyNotes__WEBPACK_IMPORTED_MODULE_4__["default"]();
 
 /***/ }),
 
@@ -2142,6 +2145,45 @@ class MobileMenu {
   }
 }
 /* harmony default export */ __webpack_exports__["default"] = (MobileMenu);
+
+/***/ }),
+
+/***/ "./src/modules/MyNotes.js":
+/*!********************************!*\
+  !*** ./src/modules/MyNotes.js ***!
+  \********************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const deleteNotes = document.querySelectorAll(".delete-note");
+class MyNotes {
+  //constructor
+  constructor() {
+    this.events();
+  }
+  events() {
+    deleteNotes.forEach(deleteNote => {
+      deleteNote.addEventListener("click", this.deleteNote);
+    });
+  }
+  //custom methods
+  async deleteNote(event) {
+    try {
+      console.log(event.target);
+      const deleteResponse = await fetch(`${bbeData.root_url}/wp-json/wp/v2/note/104`, {
+        method: "DELETE",
+        headers: {
+          "X-WP-Nonce": bbeData.nonce
+        }
+      });
+      return deleteResponse.json();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+}
+/* harmony default export */ __webpack_exports__["default"] = (MyNotes);
 
 /***/ }),
 

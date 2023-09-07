@@ -53,7 +53,7 @@ function bbe_files(){
   wp_localize_script('main-bbe-js','bbeData',array(
     // associative array
     'root_url' => get_site_url(),
-    
+    'nonce' => wp_create_nonce('wp_rest')
   ));
 
 }
