@@ -163,4 +163,15 @@ add_filter('login_headertitle', 'loginTitle');
 function loginTitle(){
   return get_bloginfo('name');
 }
+// Force note posts to be private
+// filter or modify data that will be added to the database.
+add_filter('wp_insert_post_data', 'makeNotePrivate');
+
+function makeNotePrivate($data) {
+  if($data['post_type'] == 'note' AND $data['post_status'] != 'trash') {
+    $data['post_status'] = "private";
+  }
+  
+  return $data;
+}
 ?>

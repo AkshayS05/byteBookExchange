@@ -119,7 +119,7 @@ class MyNotes {
   async updateNote(e) {
     const thisNote = this.findNearestParentLi(e.target);
 
-    var ourUpdatedPost = {
+    let ourUpdatedPost = {
       title: thisNote.querySelector(".note-title-field").value,
       content: thisNote.querySelector(".note-body-field").value,
     };
@@ -138,10 +138,10 @@ class MyNotes {
   }
 
   async createNote() {
-    var ourNewPost = {
+    let ourNewPost = {
       title: document.querySelector(".new-note-title").value,
       content: document.querySelector(".new-note-body").value,
-      status: "publish",
+      status: "private",
     };
 
     try {
@@ -189,7 +189,7 @@ class MyNotes {
         document.querySelector(".note-limit-message").classList.add("active");
       }
     } catch (e) {
-      console.error(e);
+      console.error(e.message);
     }
   }
 }
