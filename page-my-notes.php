@@ -37,10 +37,12 @@ while(have_posts()) {
           <!-- to get the id -->
       <li data-Id ="<?php the_ID(); ?>">
         <!-- whenever we want to fetch data from backend to display as value, we should use esc_attr  -->
-        <input readonly class="note-title-field" value="<?php echo esc_attr(get_the_title()); ?>">
+        <!-- str_replace method to replace "Private with empty string -->
+        <input readonly class="note-title-field" value="<?php echo str_replace('Private: ','',esc_attr(get_the_title())); ?>">
         <span class="edit-note"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</span>
         <span class="delete-note"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</span>
-        <textarea readonly class="note-body-field"><?php echo esc_attr(wp_strip_all_tags(get_the_content())); ?></textarea>
+        <!-- esc_attr, esc_textarea will not let javascript malicious code run -->
+        <textarea readonly class="note-body-field"><?php echo esc_textarea(wp_strip_all_tags(get_the_content())); ?></textarea>
         <span class="update-note btn btn--blue btn--small"><i class="fa fa-arrow-right" aria-hidden="true"></i>Save</span>
       </li>
     <?php }
