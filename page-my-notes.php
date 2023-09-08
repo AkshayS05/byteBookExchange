@@ -26,7 +26,8 @@ while(have_posts()) {
       ));
       while($userNotes -> have_posts()){
           $userNotes-> the_post(); ?>
-      <li>
+          <!-- to get the id -->
+      <li data-noteId ="<?php the_ID(); ?>">
         <!-- whenever we want to fetch data from backend to display as value, we should use esc_attr  -->
         <input class="note-title-field" value="<?php echo esc_attr(get_the_title()); ?>">
         <span class="edit-note"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</span>
