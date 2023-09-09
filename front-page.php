@@ -95,11 +95,11 @@
     <div class="hero-slider">
       <div data-glide-el="track" class="glide__track">
         <div class="glide__slides">
-          <div class="hero-slider__slide" style="background-image: url(<?php echo get_theme_file_uri('images/bus.jpg') ?>)">
+          <div class="hero-slider__slide" style="background-image: url(<?php echo get_theme_file_uri('images/banner_bbe.jpg') ?>)">
             <div class="hero-slider__interior container">
               <div class="hero-slider__overlay">
-                <h2 class="headline headline--medium t-center">Free Transportation</h2>
-                <p class="t-center">All students have free unlimited bus fare.</p>
+                <h2 class="headline headline--medium t-center"> "Shaping Your Digital Destiny"</h2>
+                <p class="t-center">"With every line of code, you're sculpting your own digital destiny."</p>
                 <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
               </div>
             </div>
@@ -107,9 +107,8 @@
           <div class="hero-slider__slide" style="background-image: url(<?php echo get_theme_file_uri('images/bannerbbe.jpg') ?> ">
             <div class="hero-slider__interior container">
               <div class="hero-slider__overlay">
-                <h2 class="headline headline--medium t-center"> Patrick McKenzie:</h2>
-                <p class="t-center">"Every great developer you know got there by solving problems they were unqualified to solve
-                   until they actually did it."</p>
+                <h2 class="headline headline--medium t-center"> "Unleash Infinite Possibilities"</h2>
+                <p class="t-center">"Learn to code, and you'll create worlds of possibilities."</p>
                 <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
               </div>
             </div>
@@ -117,7 +116,7 @@
           <div class="hero-slider__slide" style="background-image: url(<?php echo get_theme_file_uri('images/byeBookExchange.jpg') ?>">
             <div class="hero-slider__interior container">
               <div class="hero-slider__overlay">
-                <h2 class="headline headline--medium t-center">Free learning by knowledge sharing</h2>
+                <h2 class="headline headline--medium t-center">"Free learning by knowledge sharing"</h2>
                 <p class="t-center">"Byte Book Exchange: Unleashing Knowledge, One Byte at a Time."</p>
                 <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
               </div>
