@@ -12,6 +12,12 @@ function bbe_custom_rest(){
       return get_the_author();
     }
   ));
+  register_rest_field("note",'userNoteCount',array(
+    //associative array
+    'get_callback' => function(){
+      return count_user_posts(get_current_user_id(),'note');
+    }
+  ));
 }
 //$args = NULL will make it optional
 function pageBanner($args= NULL){
@@ -165,11 +171,18 @@ function loginTitle(){
 }
 // Force note posts to be private
 // filter or modify data that will be added to the database.
-add_filter('wp_insert_post_data', 'makeNotePrivate');
+// 2- represnte we want functionn to accept two parameters
+// 10 -> priortiy on when it will run
+add_filter('wp_insert_post_data', 'makeNotePrivate', 10, 2);
 
-function makeNotePrivate($data) {
+function makeNotePrivate($data, $postarr) {
   // the first condition will remove all the html removed in case they add.
   if ($data['post_type'] == 'note'){
+    // which user account , which post type
+    // new post we are intending to create wil  not have an id
+    if (count_user_posts(get_current_user_id(), 'note') > 2 AND !$postarr['ID']){
+        die("You have exceeded the note limit.");
+    }
     $data['post_content'] = sanitize_textarea_field($data['post_content']);
     $data['post_title'] = sanitize_text_field($data['post_title']);
   }

@@ -104,20 +104,21 @@
               </div>
             </div>
           </div>
-          <div class="hero-slider__slide" style="background-image: url(<?php echo get_theme_file_uri('images/apples.jpg') ?> ">
+          <div class="hero-slider__slide" style="background-image: url(<?php echo get_theme_file_uri('images/bannerbbe.jpg') ?> ">
             <div class="hero-slider__interior container">
               <div class="hero-slider__overlay">
-                <h2 class="headline headline--medium t-center">An Apple a Day</h2>
-                <p class="t-center">Our dentistry program recommends eating apples.</p>
+                <h2 class="headline headline--medium t-center"> Patrick McKenzie:</h2>
+                <p class="t-center">"Every great developer you know got there by solving problems they were unqualified to solve
+                   until they actually did it."</p>
                 <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
               </div>
             </div>
           </div>
-          <div class="hero-slider__slide" style="background-image: url(<?php echo get_theme_file_uri('images/bread.jpg') ?>">
+          <div class="hero-slider__slide" style="background-image: url(<?php echo get_theme_file_uri('images/byeBookExchange.jpg') ?>">
             <div class="hero-slider__interior container">
               <div class="hero-slider__overlay">
-                <h2 class="headline headline--medium t-center">Free Food</h2>
-                <p class="t-center">Fictional University offers lunch plans for those in need.</p>
+                <h2 class="headline headline--medium t-center">Free learning by knowledge sharing</h2>
+                <p class="t-center">"Byte Book Exchange: Unleashing Knowledge, One Byte at a Time."</p>
                 <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
               </div>
             </div>
