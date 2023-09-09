@@ -1,6 +1,7 @@
 <?php 
 //to get file from includes folder
 require get_theme_file_path('/includes/search-route.php');
+require get_theme_file_path('/includes/like-route.php');
 
 add_action('rest_api_init','bbe_custom_rest');
 
