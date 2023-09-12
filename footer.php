@@ -5,7 +5,7 @@
             <h1 class="school-logo-text school-logo-text--alt-color">
               <a href="<?php echo site_url() ?>"><strong>Byte Book</strong> Exchange</a>
             </h1>
-            <p><a class="site-footer__link" href="#">555.555.5555</a></p>
+            
           </div>
 
           <div class="site-footer__col-two-three-group">
@@ -50,10 +50,10 @@
                   <a href="#" class="social-color-twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                 </li>
                 <li>
-                  <a href="#" class="social-color-youtube"><i class="fa fa-youtube" aria-hidden="true"></i></a>
+                  <a href="https://www.youtube.com/channel/UClqpQarAKPft2hClu8Y3rFw" class="social-color-youtube"><i class="fa fa-youtube" aria-hidden="true"></i></a>
                 </li>
                 <li>
-                  <a href="#" class="social-color-linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                  <a href="https://www.linkedin.com/in/akshaysharma05/" class="social-color-linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
                 </li>
                 <li>
                   <a href="#" class="social-color-instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a>

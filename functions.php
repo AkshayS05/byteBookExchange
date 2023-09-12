@@ -54,7 +54,7 @@ function bbe_files(){
   wp_enqueue_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' );
   // if (strstr($_SERVER['SERVER_NAME'], 'http://bytebookexchange.local/l')) {
     // Enqueue the JavaScript file for local development
-    wp_enqueue_script('main-bbe-js', 'http://localhost:3000/bundled.js', NULL, '1.0', true);
+    wp_enqueue_script('main-bbe-js', get_theme_file_uri('./build/index.js'), array('jquery'),'1.0',true );
 // } else {
     // Enqueue a different JavaScript file for production or other environments
     wp_enqueue_script('main-bbe-js', get_theme_file_uri('./build/production-bundled.js'), NULL, '1.0', true);
@@ -205,7 +205,8 @@ function makeNotePrivate($data, $postarr) {
 add_filter('ai1wm_exclude_themes_from_export','ignoreCertainFiles');
 
 function ignoreCertainFiles($exclude_filters){
-  $exclude_filters[]= 'ByteBookExchange/node-modules';
+  $exclude_filters[]= 'ByteBookExchange/node_modules';
+  
 
   return $exclude_filters;
 }

@@ -180,7 +180,7 @@ class Search {
     document.body.classList.add("body-no-scroll");
     this.searchField.value = "";
     setTimeout(() => this.searchField.focus(), 301);
-    console.log("our open method just ran!");
+
     this.isOverlayOpen = true;
     return false;
   }
@@ -188,7 +188,7 @@ class Search {
   closeOverlay() {
     this.searchOverlay.classList.remove("search-overlay--active");
     document.body.classList.remove("body-no-scroll");
-    console.log("our close method just ran!");
+
     this.isOverlayOpen = false;
   }
 

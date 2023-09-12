@@ -1,12 +1,12 @@
 <?php get_header(); ?>
 
 <div class="page-banner">
-      <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri('images/library-hero.jpg') ?>)"></div>
+      <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri('images/background_banner.jpg') ?>)"></div>
       <div class="page-banner__content container t-center c-white">
         <h1 class="headline headline--large">Welcome!</h1>
-        <h2 class="headline headline--medium">We think you&rsquo;ll like it here.</h2>
-        <h3 class="headline headline--small">Why don&rsquo;t you check out the <strong>major</strong> you&rsquo;re interested in?</h3>
-        <a href="<?php echo get_post_type_archive_link('program'); ?>" class="btn btn--large btn--blue">Find Your Interest</a>
+        <h2 class="headline headline--medium">You gonna love it here 😉</h2>
+        <h3 class="headline headline--small">Explore My Blogs and Discover Your <strong>Passion</strong></h3>
+        <a href="<?php echo get_post_type_archive_link('program'); ?>" class="btn btn--large btn--blue">Find Your Passion</a>
       </div>
     </div>
 
@@ -50,7 +50,7 @@
       
           ?>
 
-          <p class="t-center no-margin"><a href="<?php echo get_post_Type_archive_link('event'); ?>" class="btn btn--blue">View All Events</a></p>
+          <p class="t-center no-margin"><a href="<?php echo get_post_type_archive_link('event'); ?>" class="btn btn--blue">View All Events</a></p>
         </div>
       </div>
       <div class="full-width-split__two">
@@ -99,7 +99,7 @@
             <div class="hero-slider__interior container">
               <div class="hero-slider__overlay">
                 <h2 class="headline headline--medium t-center"> "Shaping Your Digital Destiny"</h2>
-                <p class="t-center">"With every line of code, you're sculpting your own digital destiny."</p>
+                <p class="t-center">"With every line of code,<br> you're sculpting your own digital destiny."</p>
                 <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
               </div>
             </div>
@@ -108,7 +108,7 @@
             <div class="hero-slider__interior container">
               <div class="hero-slider__overlay">
                 <h2 class="headline headline--medium t-center"> "Unleash Infinite Possibilities"</h2>
-                <p class="t-center">"Learn to code, and you'll create worlds of possibilities."</p>
+                <p class="t-center">"Learn to code,<br> and you'll create worlds of possibilities."</p>
                 <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
               </div>
             </div>
@@ -117,7 +117,7 @@
             <div class="hero-slider__interior container">
               <div class="hero-slider__overlay">
                 <h2 class="headline headline--medium t-center">"Free learning by knowledge sharing"</h2>
-                <p class="t-center">"Byte Book Exchange: Unleashing Knowledge, One Byte at a Time."</p>
+                <p class="t-center">"Byte Book Exchange: Unleashing Knowledge,<br> One Byte at a Time."</p>
                 <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
               </div>
             </div>
