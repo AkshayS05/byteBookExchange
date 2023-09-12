@@ -464,6 +464,59 @@ li {
   opacity: 0;
 }
 
+.generic-content .post-like-box {
+  float: right;
+  font-size: 1rem;
+  background-color: #ededed;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+  color: red;
+  padding: 10px 10px 10px 25px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 0 30px 30px;
+  position: relative;
+}
+
+.generic-content .post-like-box:hover {
+  background-color: #dedede;
+}
+
+.post-like-count {
+  padding-left: 10px;
+}
+
+.post-like-box .fa-heart-o {
+  transition: all 0.35s ease-out;
+  position: absolute;
+  left: 10px;
+}
+
+.post-like-box .fa-heart {
+  left: 10px;
+  transition: all 0.4s ease-out;
+  position: absolute;
+  visibility: hidden;
+  transform: scale(0.2);
+  opacity: 0;
+}
+
+.post-like-box[data-exists=yes] .fa-heart {
+  transform: scale(1);
+  visibility: visible;
+  opacity: 1;
+}
+
+.post-like-box[data-exists=yes] .fa-heart {
+  transform: scale(1);
+  visibility: visible;
+  opacity: 1;
+}
+
+.post-like-box[data-exists=yes] .fa-heart-o {
+  visibility: hidden;
+  opacity: 0;
+}
+
 /* Customize Login Screen */
 body.login .button-primary {
   background-color: #F95738;
@@ -783,7 +836,6 @@ body.login {
 }
 .site-header__search-trigger {
   cursor: pointer;
-  color: #fff;
   font-size: 1.2rem;
   position: absolute;
   top: 6px;
@@ -1042,7 +1094,7 @@ body.login {
 }
 @media (min-width: 960px) {
   .hero-slider__overlay {
-    width: 50%;
+    width: 60%;
   }
 }
 
@@ -1289,7 +1341,7 @@ body.admin-bar .search-overlay {
   font-weight: 300;
 }
 .headline--large {
-  font-size: 3.6rem;
+  font-size: 3.2rem;
 }
 @media (min-width: 530px) {
   .headline--large {

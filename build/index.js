@@ -2067,6 +2067,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_Search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/Search */ "./src/modules/Search.js");
 /* harmony import */ var _modules_MyNotes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/MyNotes */ "./src/modules/MyNotes.js");
 /* harmony import */ var _modules_Like__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/Like */ "./src/modules/Like.js");
+/* harmony import */ var _modules_PostLike__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/PostLike */ "./src/modules/PostLike.js");
 
 
 // Our modules / classes
@@ -2082,6 +2083,7 @@ const heroSlider = new _modules_HeroSlider__WEBPACK_IMPORTED_MODULE_2__["default
 const search = new _modules_Search__WEBPACK_IMPORTED_MODULE_3__["default"]();
 const notes = new _modules_MyNotes__WEBPACK_IMPORTED_MODULE_4__["default"]();
 const like = new _modules_Like__WEBPACK_IMPORTED_MODULE_5__["default"]();
+const postLike = new _modules_PostLike__WEBPACK_IMPORTED_MODULE_6__["default"]();
 
 /***/ }),
 
@@ -2214,12 +2216,23 @@ class MobileMenu {
     this.events();
   }
   events() {
-    this.openButton.addEventListener("click", () => this.openMenu());
+    this.openButton.addEventListener("click", () => this.toggleMenu());
+    window.addEventListener("resize", () => this.closeMenuOnResize());
   }
-  openMenu() {
+  toggleMenu() {
     this.openButton.classList.toggle("fa-bars");
     this.openButton.classList.toggle("fa-window-close");
     this.menu.classList.toggle("site-header__menu--active");
+  }
+  closeMenuOnResize() {
+    const windowWidth = window.innerWidth;
+
+    // Close the menu and reset the mobile menu icon on screens larger than 768px
+    if (windowWidth > 768) {
+      this.openButton.classList.remove("fa-window-close");
+      this.openButton.classList.add("fa-bars");
+      this.menu.classList.remove("site-header__menu--active");
+    }
   }
 }
 /* harmony default export */ __webpack_exports__["default"] = (MobileMenu);
@@ -2369,6 +2382,64 @@ class MyNotes {
   }
 }
 /* harmony default export */ __webpack_exports__["default"] = (MyNotes);
+
+/***/ }),
+
+/***/ "./src/modules/PostLike.js":
+/*!*********************************!*\
+  !*** ./src/modules/PostLike.js ***!
+  \*********************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "jquery");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+
+class PostLike {
+  constructor() {
+    this.events();
+  }
+  events() {
+    //class given to span
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".post-like-box").on("click", this.clickDispatcher.bind(this));
+  }
+  //methods
+
+  clickDispatcher(e) {
+    let currentPostLikeBox = jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).closest(".post-like-box");
+    if (currentPostLikeBox.data("exists") == "yes") {
+      this.deletePostLike();
+    } else {
+      this.createPostLike();
+    }
+  }
+  createPostLike() {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+      url: bbeData.root_url + "/wp-json/bbe/v1/managePostLike",
+      type: "POST",
+      success: response => {
+        console.log(response);
+      },
+      error: response => {
+        console.log(response);
+      }
+    });
+  }
+  deletePostLike() {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+      url: bbeData.root_url + "/wp-json/bbe/v1/managePostLike",
+      type: "DELETE",
+      success: response => {
+        console.log(response);
+      },
+      error: response => {
+        console.log(response);
+      }
+    });
+  }
+}
+/* harmony default export */ __webpack_exports__["default"] = (PostLike);
 
 /***/ }),
 
@@ -2543,6 +2614,17 @@ class Search {
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
+
+/***/ }),
+
+/***/ "jquery":
+/*!*************************!*\
+  !*** external "jQuery" ***!
+  \*************************/
+/***/ (function(module) {
+
+"use strict";
+module.exports = window["jQuery"];
 
 /***/ }),
 
