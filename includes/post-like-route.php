@@ -13,8 +13,17 @@ function bbePostLikeRoutes(){
   ));
 }
 
-function createPostLike() {
-return 'Thanks for trying a like';
+function createPostLike($data) {
+ $postLikeId= sanitize_text_field($data['postId']);
+wp_insert_post(array(
+  //new post that we want to create
+  'post_type' => 'post_like',
+  'post_status' => 'publish',
+  'post_title' => 'Another Test',
+  'meta_input' => array(
+    'liked_post_id' => $postLikeId
+  )
+));
 };
 
 function deletePostLike(){

@@ -13,15 +13,16 @@ class PostLike {
   clickDispatcher(e) {
     let currentPostLikeBox = $(e.target).closest(".post-like-box");
     if (currentPostLikeBox.data("exists") == "yes") {
-      this.deletePostLike();
+      this.deletePostLike(currentPostLikeBox);
     } else {
-      this.createPostLike();
+      this.createPostLike(currentPostLikeBox);
     }
   }
-  createPostLike() {
+  createPostLike(currentPostLikeBox) {
     $.ajax({
       url: bbeData.root_url + "/wp-json/bbe/v1/managePostLike",
       type: "POST",
+      data: { postId: currentPostLikeBox.data("post") },
       success: (response) => {
         console.log(response);
       },
@@ -30,10 +31,11 @@ class PostLike {
       },
     });
   }
-  deletePostLike() {
+  deletePostLike(currentPostLikeBox) {
     $.ajax({
       url: bbeData.root_url + "/wp-json/bbe/v1/managePostLike",
       type: "DELETE",
+      data: {},
       success: (response) => {
         console.log(response);
       },
