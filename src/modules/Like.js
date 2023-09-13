@@ -58,7 +58,7 @@ class Like {
         data: { like: currentLikeBox.getAttribute("data-like") },
       });
       currentLikeBox.setAttribute("data-exists", "no");
-      var likeCount = parseInt(
+      let likeCount = parseInt(
         currentLikeBox.querySelector(".like-count").innerHTML,
         10
       );

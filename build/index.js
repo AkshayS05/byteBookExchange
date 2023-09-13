@@ -2187,7 +2187,7 @@ class Like {
         }
       });
       currentLikeBox.setAttribute("data-exists", "no");
-      var likeCount = parseInt(currentLikeBox.querySelector(".like-count").innerHTML, 10);
+      let likeCount = parseInt(currentLikeBox.querySelector(".like-count").innerHTML, 10);
       likeCount--;
       currentLikeBox.querySelector(".like-count").innerHTML = likeCount;
       currentLikeBox.setAttribute("data-like", "");
@@ -2393,54 +2393,68 @@ class MyNotes {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "jquery");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 class PostLike {
   constructor() {
-    this.events();
-  }
-  events() {
-    //class given to span
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".post-like-box").on("click", this.clickDispatcher.bind(this));
-  }
-  //methods
-
-  clickDispatcher(e) {
-    let currentPostLikeBox = jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).closest(".post-like-box");
-    if (currentPostLikeBox.data("exists") == "yes") {
-      this.deletePostLike(currentPostLikeBox);
-    } else {
-      this.createPostLike(currentPostLikeBox);
+    if (document.querySelector(".post-like-box")) {
+      (axios__WEBPACK_IMPORTED_MODULE_0___default().defaults).headers.common["X-WP-Nonce"] = bbeData.nonce;
+      this.events();
     }
   }
-  createPostLike(currentPostLikeBox) {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
-      url: bbeData.root_url + "/wp-json/bbe/v1/managePostLike",
-      type: "POST",
-      data: {
-        postId: currentPostLikeBox.data("post")
-      },
-      success: response => {
-        console.log(response);
-      },
-      error: response => {
-        console.log(response);
-      }
-    });
+  events() {
+    document.querySelector(".post-like-box").addEventListener("click", e => this.ourClickDispatcher(e));
   }
-  deletePostLike(currentPostLikeBox) {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
-      url: bbeData.root_url + "/wp-json/bbe/v1/managePostLike",
-      type: "DELETE",
-      data: {},
-      success: response => {
-        console.log(response);
-      },
-      error: response => {
-        console.log(response);
+
+  // methods
+  ourClickDispatcher(e) {
+    let currentLikeBox = e.target;
+    while (!currentLikeBox.classList.contains("post-like-box")) {
+      currentLikeBox = currentLikeBox.parentElement;
+    }
+    if (currentLikeBox.getAttribute("data-present") == "yes") {
+      this.deletePostLike(currentLikeBox);
+    } else {
+      this.createPostLike(currentLikeBox);
+    }
+  }
+  async createPostLike(currentLikeBox) {
+    try {
+      const response = await axios__WEBPACK_IMPORTED_MODULE_0___default().post(`${bbeData.root_url}/wp-json/bbe/v1/managePostLike`, {
+        postId: currentLikeBox.getAttribute("data-post")
+      });
+      if (response.data != "Only logged in users can create like a post.") {
+        currentLikeBox.setAttribute("data-present", "yes");
+        let likeCount = parseInt(currentLikeBox.querySelector(".post-like-count").innerHTML, 10);
+        likeCount++;
+        currentLikeBox.querySelector(".post-like-count").innerHTML = likeCount;
+        currentLikeBox.setAttribute("data-postLike", response.data);
       }
-    });
+      // console.log(response.data);
+    } catch (e) {
+      console.log("Sorry");
+    }
+  }
+  async deletePostLike(currentLikeBox) {
+    try {
+      console.log("Reaching here....");
+      const response = await axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        url: `${bbeData.root_url}/wp-json/bbe/v1/managePostLike`,
+        method: "delete",
+        data: {
+          postLike: currentLikeBox.getAttribute("data-postLike")
+        }
+      });
+      currentLikeBox.setAttribute("data-present", "no");
+      let likeCount = parseInt(currentLikeBox.querySelector(".post-like-count").innerHTML, 10);
+      likeCount--;
+      currentLikeBox.querySelector(".post-like-count").innerHTML = likeCount;
+      currentLikeBox.setAttribute("data-postLike", "");
+      console.log(response.data);
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
 /* harmony default export */ __webpack_exports__["default"] = (PostLike);
@@ -2618,17 +2632,6 @@ class Search {
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
-
-/***/ }),
-
-/***/ "jquery":
-/*!*************************!*\
-  !*** external "jQuery" ***!
-  \*************************/
-/***/ (function(module) {
-
-"use strict";
-module.exports = window["jQuery"];
 
 /***/ }),
 
