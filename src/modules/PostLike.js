@@ -52,7 +52,6 @@ class PostLike {
 
   async deletePostLike(currentLikeBox) {
     try {
-      console.log("Reaching here....");
       const response = await axios({
         url: `${bbeData.root_url}/wp-json/bbe/v1/managePostLike`,
         method: "delete",
@@ -66,10 +65,7 @@ class PostLike {
       likeCount--;
       currentLikeBox.querySelector(".post-like-count").innerHTML = likeCount;
       currentLikeBox.setAttribute("data-postLike", "");
-      console.log(response.data);
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   }
 }
 
